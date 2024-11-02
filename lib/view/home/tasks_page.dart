@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
@@ -92,12 +94,13 @@ class TasksPage extends StatelessWidget {
                           itemCount: taskViewModel.tasks.length,
                           itemBuilder: (context, index) {
                             Task task = taskViewModel.tasks[index];
+                            Color tileColor = generateRandomLightColor();
                             return Container(
                               margin: const EdgeInsets.symmetric(
                                   horizontal: 8, vertical: 8),
                               padding: const EdgeInsets.symmetric(vertical: 4),
                               decoration: BoxDecoration(
-                                color: Colors.amberAccent,
+                                color: tileColor,
                                 borderRadius: BorderRadius.circular(8),
                                 border: Border.all(color: Colors.black),
                               ),
@@ -151,5 +154,13 @@ class TasksPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Color generateRandomLightColor() {
+    Random random = Random();
+    int red = 160 + random.nextInt(55);
+    int green = 160 + random.nextInt(55);
+    int blue = 160 + random.nextInt(55);
+    return Color.fromRGBO(red, green, blue, 1.0);
   }
 }
